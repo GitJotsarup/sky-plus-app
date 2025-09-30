@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sky+</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --brand-purple: #4B2D7B;
+        }
+
+        body {
+            background-color: #f3f4f6; /* Light gray background */
+        }
+
+        .main-gradient {
+            background: var(--brand-purple);
+        }
+        
+        .brand-text {
+            color: var(--brand-purple);
+        }
+
+        .brand-bg {
+            background-color: var(--brand-purple);
+        }
+        
+        .brand-bg-light {
+             background-color: #e9e3f3;
+        }
+        
+        .brand-border {
+            border-color: var(--brand-purple);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Custom scrollbar for grade list */
+        .grade-list::-webkit-scrollbar {
+            width: 4px;
+        }
+        .grade-list::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .grade-list::-webkit-scrollbar-thumb {
+            background: #d1c4e9;
+            border-radius: 4px;
+        }
+        .grade-list::-webkit-scrollbar-thumb:hover {
+            background: #b39ddb;
+        }
+
+        /* Timetable grid styling */
+        .timetable-grid {
+            display: grid;
+            grid-template-columns: 50px repeat(5, 1fr); /* Time column + 5 weekdays */
+            grid-template-rows: 30px repeat(10, 50px); /* Header + 10 time slots (e.g., 8am-6pm) */
+            gap: 2px;
+        }
+        .time-slot, .day-header {
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6b7280;
+        }
+        .class-block {
+            border-radius: 8px;
+            padding: 4px;
+            font-size: 0.65rem;
+            color: white;
+            overflow: hidden;
+            line-height: 1.2;
+            position: relative;
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-800">
+    
+    <!-- Main App Container -->
+    <div id="app-container" class="max-w-md mx-auto h-screen flex flex-col shadow-2xl">
+        
+        <!-- Header -->
+        <header class="main-gradient p-2 flex items-center justify-center shadow-md z-10">
+           <img src="./images/skylogo.png" alt="sky+ Logo" class="h-16">
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="flex-grow overflow-y-auto pb-20 bg-white">
+            
+            <!-- Home Tab Content -->
+            <div id="home" class="tab-content active p-4 md:p-6">
+                <!-- Profile Section -->
+                <div class="flex items-center space-x-4 mb-6">
+                    <img src="./images/portrait.png" alt="Profile Photo" class="w-20 h-20 rounded-full border-4 brand-border">
+                    <h2 class="text-xl font-bold tracking-tight">Jotsarup Singh Narula</h2>
+                </div>
+
+                <!-- Stats Section -->
+                <div class="grid grid-cols-3 gap-4 text-center mb-6">
+                    <div class="brand-bg-light p-4 rounded-xl">
+                        <p class="text-xs brand-text font-semibold">GPA</p>
+                        <p class="text-2xl font-bold brand-text">2.85</p>
+                    </div>
+                    <div class="bg-green-50 p-4 rounded-xl">
+                        <p class="text-xs text-green-600 font-semibold">Credits Taken</p>
+                        <p class="text-2xl font-bold text-green-800">38</p>
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-xl">
+                        <p class="text-xs text-blue-600 font-semibold">Credits Left</p>
+                        <p class="text-2xl font-bold text-blue-800">16</p>
+                    </div>
+                </div>
+
+                <!-- Major Classes Section -->
+                 <div class="mb-6">
+                    <h3 class="font-bold text-lg mb-3">Business Major Classes</h3>
+                    <div class="space-y-2">
+                        <div class="bg-gray-50 p-3 rounded-lg flex justify-between items-center"><span>Essentials of Entrepreneurship</span> <span class="font-bold brand-text">B</span></div>
+                        <div class="bg-gray-50 p-3 rounded-lg flex justify-between items-center"><span>ICMB 104 Marketing</span> <span class="font-bold brand-text">B+</span></div>
+                        <div class="bg-gray-50 p-3 rounded-lg flex justify-between items-center"><span>ICMB 205 Human Resource Mgt.</span> <span class="font-bold brand-text">B+</span></div>
+                        <div class="bg-gray-50 p-3 rounded-lg flex justify-between items-center"><span>ICMB 108 Financial Accounting</span> <span class="font-bold brand-text">B</span></div>
+                        <div class="bg-gray-50 p-3 rounded-lg flex justify-between items-center"><span>ICMB 109 E-Business</span> <span class="font-bold brand-text">B</span></div>
+                        <div class="bg-gray-50 p-3 rounded-lg flex justify-between items-center"><span>ICMB 204 Mastering Excel</span> <span class="font-bold brand-text">A</span></div>
+                    </div>
+                </div>
+
+
+                <!-- Grades Section -->
+                <div>
+                    <h3 class="font-bold text-lg mb-3">Full Academic Record</h3>
+                    <div class="bg-gray-50 p-4 rounded-xl shadow-inner max-h-64 overflow-y-auto grade-list">
+                        <table class="w-full text-sm">
+                            <thead class="border-b">
+                                <tr class="text-left text-gray-600">
+                                    <th class="py-2">Course</th>
+                                    <th class="py-2 text-center">Credits</th>
+                                    <th class="py-2 text-right">Grade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Data from user -->
+                                <tr class="border-b"><td class="py-3">ICCS 101 Intro to CS</td><td class="py-3 text-center">4</td><td class="py-3 text-right font-semibold text-yellow-500">B</td></tr>
+                                <tr class="border-b"><td class="py-3">ICGC 101 English Comm</td><td class="py-3 text-center">4</td><td class="py-3 text-right font-semibold text-yellow-500">B</td></tr>
+                                <tr class="border-b"><td class="py-3">ICPY 101 Physics I</td><td class="py-3 text-center">4</td><td class="py-3 text-right font-semibold text-red-500">D</td></tr>
+                                <tr class="border-b"><td class="py-3">ICGC 102 English Comm II</td><td class="py-3 text-center">4</td><td class="py-3 text-right font-semibold text-blue-500">B+</td></tr>
+                                <tr class="border-b"><td class="py-3">ICPY Lab</td><td class="py-3 text-center">2</td><td class="py-3 text-right font-semibold text-yellow-500">B</td></tr>
+                                <tr class="border-b"><td class="py-3">ICMA 106 Calculus I</td><td class="py-3 text-center">4</td><td class="py-3 text-right font-semibold text-red-600">F</td></tr>
+                                <tr class="border-b"><td class="py-3">ICPY 4 Physics II</td><td class="py-3 text-center">4</td><td class="py-3 text-right font-semibold text-orange-500">C+</td></tr>
+                                <tr class="border-b"><td class="py-3">ICCS 121 System Skills</td><td class="py-3 text-center">4</td><td class="py-3 text-right font-semibold text-green-600">A</td></tr>
+                                <tr class="border-b"><td class="py-3">ICGC 103 English Comm III</td><td class="py-3 text-center">4</td><td class="py-3 text-right font-semibold text-blue-500">B+</td></tr>
+                                <tr class="border-b"><td class="py-3">ICGN Photography</td><td class="py-3 text-center">4</td><td class="py-3 text-right font-semibold text-blue-500">B+</td></tr>
+                                <tr class="border-b"><td class="py-3">ICMA 106 Calculus I (Retake)</td><td class="py-3 text-center">4</td><td class="py-3 text-right font-semibold text-gray-500">W</td></tr>
+                                <tr class="border-b"><td class="py-3">ICMA 106 Calculus I (Final)</td><td class="py-3 text-center">4</td><td class="py-3 text-right font-semibold text-orange-600">C</td></tr>
+                                <tr class="border-b"><td class="py-3">ICMA Statistics for Science</td><td class="py-3 text-center">4</td><td class="py-3 text-right font-semibold text-orange-600">C</td></tr>
+                                <tr class="border-b"><td class="py-3">Essentials of Entrepreneurship</td><td class="py-3 text-center">4</td><td class="py-3 text-right font-semibold text-yellow-500">B</td></tr>
+                                <tr class="border-b"><td class="py-3">Microeconomics</td><td class="py-3 text-center">4</td><td class="py-3 text-right font-semibold text-orange-500">C+</td></tr>
+                                <tr class="border-b"><td class="py-3">ICCS 208 Data Structures</td><td class="py-3 text-center">4</td><td class="py-3 text-right font-semibold text-red-500">D</td></tr>
+                                <tr class="border-b"><td class="py-3">ICMA 213 Calculus II</td><td class="py-3 text-center">4</td><td class="py-3 text-right font-semibold text-orange-600">C</td></tr>
+                                <tr><td class="py-3">ICCS 206 Discrete Mathematics</td><td class="py-3 text-center">4</td><td class="py-3 text-right font-semibold text-orange-500">C+</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Student ID Tab Content -->
+            <div id="student-id" class="tab-content p-4 md:p-6 flex flex-col items-center space-y-6">
+                 <h3 class="font-bold text-lg text-center">Digital Student ID</h3>
+                 <p class="text-sm text-center text-gray-500 -mt-4">Present this to university staff when required.</p>
+                 <img src="./images/idfront.jpg" alt="Student ID Front" class="rounded-xl shadow-lg w-full max-w-sm">
+                 <img src="./images/idback.jpg" alt="Student ID Back" class="rounded-xl shadow-lg w-full max-w-sm">
+            </div>
+
+            <!-- Timetable Tab Content -->
+            <div id="timetable" class="tab-content p-2 md:p-4">
+                 <h3 class="font-bold text-lg mb-4 text-center">Current Timetable</h3>
+                 <div class="bg-gray-50 p-2 rounded-xl shadow-inner">
+                    <div class="timetable-grid">
+                        <!-- Headers -->
+                        <div class="time-slot"></div>
+                        <div class="day-header">Mon</div><div class="day-header">Tue</div><div class="day-header">Wed</div><div class="day-header">Thu</div><div class="day-header">Fri</div>
+                        <!-- Time Slots -->
+                        <div class="time-slot">08:00</div> <div></div><div></div><div></div><div></div><div></div>
+                        <div class="time-slot">09:00</div> <div></div><div></div><div></div><div></div><div></div>
+                        <div class="time-slot">10:00</div><div></div><div></div><div></div><div></div><div></div>
+                        <div class="time-slot">11:00</div><div></div><div></div><div></div><div></div><div></div>
+                        <div class="time-slot">12:00</div><div></div><div></div><div></div><div></div><div></div>
+                        <div class="time-slot">13:00</div><div></div><div></div><div></div><div></div><div></div>
+                        <div class="time-slot">14:00</div><div></div><div></div><div></div><div></div><div></div>
+                        <div class="time-slot">15:00</div><div></div><div></div><div></div><div></div><div></div>
+                        <div class="time-slot">16:00</div><div></div><div></div><div></div><div></div><div></div>
+                        <div class="time-slot">17:00</div><div></div><div></div><div></div><div></div><div></div>
+
+                        <!-- Current Classes -->
+                        <div class="class-block bg-blue-500" style="grid-column: 2; grid-row: 4 / span 2;"><b>ICSL201</b><br>Ethics</div>
+                        <div class="class-block bg-green-500" style="grid-column: 3; grid-row: 7 / span 2;"><b>ICMB302</b><br>Game Theory</div>
+                        <div class="class-block bg-purple-500" style="grid-column: 4; grid-row: 4 / span 2;"><b>ICMB109</b><br>Social Media Mkt</div>
+                        <div class="class-block bg-red-500" style="grid-column: 5; grid-row: 7 / span 2;"><b>ICMB204</b><br>Macroeconomics</div>
+                    </div>
+                 </div>
+                 <div class="mt-4 space-y-3 px-2">
+                     <div class="flex items-start space-x-3"><div class="w-4 h-4 rounded-full bg-blue-500 mt-1 flex-shrink-0"></div><div><p class="font-bold">ICSL201 - Ethics</p><p class="text-sm text-gray-600">Mon, 10:00 - 11:50 | Room 2208</p></div></div>
+                     <div class="flex items-start space-x-3"><div class="w-4 h-4 rounded-full bg-purple-500 mt-1 flex-shrink-0"></div><div><p class="font-bold">ICMB 109 - Social Media Marketing</p><p class="text-sm text-gray-600">Wed, 10:00 - 11:50 | Room 3110</p></div></div>
+                     <div class="flex items-start space-x-3"><div class="w-4 h-4 rounded-full bg-green-500 mt-1 flex-shrink-0"></div><div><p class="font-bold">ICMB302 - Game Theory</p><p class="text-sm text-gray-600">Tue, 13:00 - 14:50 | Room 5302</p></div></div>
+                     <div class="flex items-start space-x-3"><div class="w-4 h-4 rounded-full bg-red-500 mt-1 flex-shrink-0"></div><div><p class="font-bold">ICMB 204 - Macroeconomics</p><p class="text-sm text-gray-600">Thu, 13:00 - 14:50 | Room 4101</p></div></div>
+                 </div>
+            </div>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white border-t shadow-t-xl">
+            <div class="flex justify-around">
+                <button data-tab="home" class="nav-tab brand-text flex-1 flex flex-col items-center p-3">
+                    <i data-lucide="home"></i>
+                    <span class="text-xs mt-1">Home</span>
+                </button>
+                <button data-tab="student-id" class="nav-tab text-gray-500 flex-1 flex flex-col items-center p-3">
+                    <i data-lucide="contact"></i>
+                    <span class="text-xs mt-1">Student ID</span>
+                </button>
+                <button data-tab="timetable" class="nav-tab text-gray-500 flex-1 flex flex-col items-center p-3">
+                    <i data-lucide="calendar-days"></i>
+                    <span class="text-xs mt-1">Timetable</span>
+                </button>
+            </div>
+        </nav>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Lucide Icons
+            lucide.createIcons();
+
+            // Tab Switching Logic
+            const navTabs = document.querySelectorAll('.nav-tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            navTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const targetTab = tab.dataset.tab;
+
+                    // Update tab content visibility
+                    tabContents.forEach(content => {
+                        content.classList.toggle('active', content.id === targetTab);
+                    });
+
+                    // Update nav tab styling
+                    navTabs.forEach(t => {
+                        t.classList.remove('brand-text');
+                        t.classList.add('text-gray-500');
+                    });
+                    tab.classList.remove('text-gray-500');
+                    tab.classList.add('brand-text');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
